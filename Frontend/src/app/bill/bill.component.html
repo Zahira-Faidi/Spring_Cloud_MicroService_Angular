@@ -1,0 +1,47 @@
+<div class="container" *ngIf="bill">
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <b><div class="card-header bg-primary text-white"> Bill ID: {{customerId}}</div></b>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Bill Id:</strong> {{bill.customer.id}}</li>
+            <li class="list-group-item"><strong>Billing Date:</strong> {{bill.billingDate | date:'dd/MM/yyyy'}}</li>
+            <li class="list-group-item"><strong>Customer Id:</strong> {{bill.customer.id}}</li>
+            <li class="list-group-item"><strong>Name:</strong> {{bill.customer.name}}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{bill.customer.email}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-12 mt-3">
+      <div class="card">
+        <b><div class="card-header bg-success text-white">Product Items</div></b>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead class="table-info">
+              <tr>
+                <th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th> <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pi of bill.productItems">
+                <td>{{pi.id}}</td>
+                <td>{{pi.productName}}</td>
+                <td>{{pi.quantity}}</td>
+                <td>{{pi.price | currency : 'MAD '}}</td>
+                <td class="text-success">{{pi.amount | currency : 'MAD ' : 'symbol' :'4.2-2'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 class="text-center text-success">Facture Amount: {{bill.total | currency : 'MAD ' : 'symbol' :'.2-2'}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-center bg-secondary text-light mt-3">
+    {{bill.billingDate | date}}
+  </div>
+</div>
